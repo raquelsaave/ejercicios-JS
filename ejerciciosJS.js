@@ -421,6 +421,15 @@ function acronimo(){
   }
   document.getElementById('acr').innerHTML = str.toUpperCase() + '   NO es una acronimo'
 }
+// Determina si una cadena dada por el usuario es un acrónimo
+function palindromo(){
+  let str = window.prompt('Ingresa la palabra: ');
+  var rev = str.split('').reverse().join('').replace(/ /g, "")
+  if (str.replace(/ /g, "") == rev ){
+    document.getElementById('pali').innerHTML = str + '   SI es un palindromo'
+  }
+  document.getElementById('pali').innerHTML = str + '   NO es un palindromo'
+}
 // Implementa una lista ligada
 function list() { 
   this.head = null; 

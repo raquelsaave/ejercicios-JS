@@ -235,6 +235,18 @@ class Persona{
 /*
   Crea una clase Product que recibe un nombre y un valor
   tiene un método (value) que regresa su valor con iva (x1.16) */
+
+/*
+  Crea otra clase Cart que recibe un arreglo de Product
+  tiene un método (add) que recibe un Product y lo agrega a su lista
+  tiene un método (total) que regresa el total de todos los Product(con iva) */
+
+/*
+  Crea otra clase Food que hereda de product
+  su método value regresa el valor sin iva
+  Esta clase debería poder usarse en Cart
+*/
+
 class Product{
   constructor(nombre,valor){
     this.nombre = nombre;
@@ -243,34 +255,52 @@ class Product{
   }
   value(){
     var valor= (this.valor*1.16) + this.valor
-    return " Precio + IVA = " +  valor;
+    return  valor;
   }
   item(){
     var it= [this.nombre, this.valor];
     return it;
   }
 };
-/*
-  Crea otra clase Cart que recibe un arreglo de Product
-  tiene un método (add) que recibe un Product y lo agrega a su lista
-  tiene un método (total) que regresa el total de todos los Product(con iva) */
-class Cart extends Product{
-  constructor(nombre,valor){
-    super(nombre,valor)
+
+class Cart{
+  constructor(){
+    this.lista = []; 
     console.log("Se genero la instancia de Cart!",);
   }
-  add(){
-    var prod= [Product.item()];
-    var cart=[];
-    cart.push(prod)
-    return cart
+  add(product){
+    if(!(product instanceof Product)){
+      throw new Error ("Debe ser tipo Producto")
+    }
+    this.lista.push(product);
   }
 
+  total(){
+    var total = 0;
+    for( var i in this.lista){
+      total += this.lista[i].value(); 
+    }
+    return total
+  }
+}
 
-};
-/*
-  Crea otra clase Food que hereda de product
-  su método value regresa el valor sin iva
-  Esta clase debería poder usarse en Cart
-*/
-*/
+class Food extends Product {
+  constructor (nombre,valor){
+    super(nombre,valor);
+    this.nombre = nombre;
+    this.valor= valor;
+  }
+  value(){
+    return this.valor;
+  }
+
+}
+
+var prod1 = new Product('Sabritas',13);
+var prod2 = new Product('Jugo', 10);
+
+var cart = new Cart();
+cart.add(prod1);
+cart.add(prod2);
+
+console.log(cart.total())
