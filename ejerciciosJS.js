@@ -194,7 +194,7 @@ function error() {
 // Extiende la función anterior para atrapar el error e imprimir su mensaje y stack
 function errorImp() {
   try {
-    error()
+    error();
   } catch (Error) {
     document.getElementById('err').innerHTML = Error;
     document.getElementById('errStack').innerHTML = Error.stack;
@@ -205,10 +205,8 @@ function sumaNumeros() {
   var tots = 0;
   var num = 0;
   while (/\d/.test(num)) {
-    tots = num + tots;
-    console.log(tots)
-    let n = window.prompt('Ingresa numero a sumar');
-    n = parseFloat(n);
+    tots += num;
+    let n = parseFloat(window.prompt('Ingresa numero a sumar'));
     num = n;
   }
   document.getElementById('sumN').innerHTML = tots;
@@ -243,22 +241,21 @@ function tipoAngulo() {
   } else if (ang == 180) {
     res = "Llano";
   } else {
-    res = "Angulo no valido";
+    res = "Angulo no valido, solo de 0 a 180";
   }
   document.getElementById('tipo').innerHTML = res;
 }
 // Regresa un arreglo nuevo sin los valores repetidos de un arreglo original
-  function noRepeat() {
-    let arr = window.prompt('Ingresa el arreglo: ');
-    var newArr = [];
-    for (let i = 0; i < arr.length; i++) {
-      if (!newArr.includes(arr[i])) {
-        newArr.push(arr[i]);
-        console.log(newArr);
-      }
+function noRepeat() {
+  let arr = window.prompt('Ingresa el arreglo: ');
+  var newArr = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (!newArr.includes(arr[i])) {
+      newArr.push(arr[i]);
     }
-    document.getElementById('repeat').innerHTML = newArr;
   }
+  document.getElementById('repeat').innerHTML = newArr;
+}
 
 // Quita los valores repetidos de un arreglo (sin usar otro arreglo)
 function noRepeatEasy() {
@@ -275,10 +272,10 @@ function aDecimal() {
   let num = window.prompt('Ingresa el numero binario: ');
   var raiz = 0;
   var res = 0;
-  for (i = num.length - 1; i > -1; i--) {
+  for (let i = num.length - 1; i > -1; i--) {
     var op = num[i] * Math.pow(2, raiz)
     raiz++
-    res = op + res
+    res += op;
   }
   document.getElementById('decimal').innerHTML = res;
 }
@@ -316,7 +313,8 @@ function aBinarioMas() {
 function share() {
   var arr1 = [];
   var arr2 = [];
-  var count= 0;;
+  var arr3 = [];
+  var count = 0;
   while (arr1.length != 5) {
     let val = parseInt(window.prompt('Ingresa un valor del 1er arreglo: '));
     arr1.push(val)
@@ -325,13 +323,19 @@ function share() {
     let val = parseInt(window.prompt('Ingresa un valor del 2er arreglo: '));
     arr2.push(val)
   }
-  for(i=0;i<arr1.length;i++){
-    if(arr2.includes(arr1[i])){
+  for (i = 0; i < arr1.length; i++) {
+    if (arr2.includes(arr1[i])) {
       count++
+      arr3.push(arr1[i]);
     }
   }
-  document.getElementById('shareNow').innerHTML = count
+  document.getElementById('shareNow').innerHTML = 'Cantidad de repetidos  ' + count ;
 }
+/*function share2(){
+  return arr1.filter(function(valor){
+    return arr2.includes(valor);
+  });
+}*/
 // Valida que una cadena dada no tenga espacios en blanco
 function noSpaces() {
   let str = window.prompt('Ingresa el arreglo: ');
@@ -392,25 +396,49 @@ function scrabble() {
   }
   document.getElementById('points').innerHTML = puntaje;
 }
-  // Determina si una cadena dada por el usuario es un acrónimo
+// Determina si una cadena dada por el usuario es un acrónimo
+function acronimo(){
+  let palabra1 = window.prompt('Ingresa la primera palabra: ');
+  let palabra2 = window.prompt('Ingresa la segunda palabra: ');
+  let str = window.prompt('Ingresa el presunto acronimo: ');
+  /* Este codigo es para generara un acronimo de una palabra dada
+  var words, acronym, nextWord, check1, check2;
+  words =str.trim().split(' ');
+  acr = ''
+  acronym ='';
+  var index=0;
+  while(index<words.length){
+    nextWord = words[index];
+    acronym += nextWord.charAt(0);
+    index++;
+  } 
+  acronym.toUpperCase() */ 
+  var check1 = palabra1.charAt(0).toUpperCase();
+  var check2 = palabra2.charAt(0).toUpperCase();
+  var acr =check1+check2;
+  if(acr == str){
+   document.getElementById('acr').innerHTML = str.toUpperCase() + '   SI es un acronimo'
+  }
+  document.getElementById('acr').innerHTML = str.toUpperCase() + '   NO es una acronimo'
+}
+// Implementa una lista ligada
 
-  // Implementa una lista ligada
+// Implementa una lista doblemente ligada
 
-  // Implementa una lista doblemente ligada
 // Obten el Máximo común divisor de dos números dados
-function maxComun(){
+function maxComun() {
   let num1 = parseInt(window.prompt('Ingresa el primer numero (mayor): '));
   let num2 = parseInt(window.prompt('Ingresa el segundo numero (menor): '));
-  var res=0;
-  var div=0;
-  while (num1 !=0 && num2 !=0){
-    res = num1 % num2 
-    div = num1/num2
+  var res = 0;
+  var div = 0;
+  while (num1 != 0 && num2 != 0) {
+    res = num1 % num2
+    div = num1 / num2
     num1 = num2;
     num2 = res;
   }
-  if( num1 == 0){
-    document.getElementById('mcd').innerHTML = num2; 
+  if (num1 == 0) {
+    document.getElementById('mcd').innerHTML = num2;
   }
   document.getElementById('mcd').innerHTML = num1;
 }
