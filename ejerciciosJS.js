@@ -422,7 +422,28 @@ function acronimo(){
   document.getElementById('acr').innerHTML = str.toUpperCase() + '   NO es una acronimo'
 }
 // Implementa una lista ligada
-
+function list() { 
+  this.head = null; 
+  this.tail = null; 
+  this.createNode=function(data) { 
+    return {data: data, next: null } 
+  
+}; 
+  this.addNode=function(data) {
+    if (this.head == null) { 
+      this.tail = this.createNode(data);
+      this.head = this.tail; 
+    } else { 
+      this.tail.next = this.createNode(data); this.tail = this.tail.next; 
+    } 
+  }; 
+  this.printNode=function() { 
+    var x = this.head; 
+    while (x != null) { 
+      console.log(x.data); x = x.next;
+    }
+  } 
+} 
 // Implementa una lista doblemente ligada
 
 // Obten el Máximo común divisor de dos números dados
