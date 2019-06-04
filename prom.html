@@ -1,0 +1,52 @@
+<html>
+
+<body id="body">
+
+</body>
+<script>
+    // fetch ya te regresa una promesa
+    // S O L O como P R O M E S A
+    /*fetch("https://random.dog/woof.json").then(Response => {
+        console.log(Response);
+        return Response.json()
+    }).then((data) => {
+        console.log(data)
+        var image = document.createElement("img");
+        var imageParent = document.getElementById("body");
+        image.id = "id";
+        image.src = data.url;            // image.src = "IMAGE URL/PATH"
+        imageParent.appendChild(image);
+    });*/
+
+    // S O L O como A S Y N C / A W A I T
+    /*async function obtenerPerrito() {
+        let response = await fetch("https://random.dog/woof.json")
+        console.log(response);
+        let data = await response.json();
+        console.log(data);
+        var image = document.createElement("img");
+        var imageParent = document.getElementById("body");
+        image.id = "id";
+        image.src = data.url;            // image.src = "IMAGE URL/PATH"
+        imageParent.appendChild(image)
+    }
+    obtenerPerrito()*/
+
+    // C O M B I N A C I O N  Promesa & Async/Await
+    async function obtenerPerrito1() {
+        let respuesta = await fetch("https://random.dog/woof.json")
+        console.log(respuesta);
+
+        respuesta.json().then((data) => {
+            var image = document.createElement("img");
+            var imageParent = document.getElementById("body");
+            image.id = "id";
+            image.src = data.url;            // image.src = "IMAGE URL/PATH"
+            imageParent.appendChild(image)
+        });
+    }
+    obtenerPerrito1()
+
+</script>
+
+</html>
